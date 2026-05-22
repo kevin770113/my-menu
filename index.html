@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電源管理 IC 產品線市場與開發策略分析</title>
+    <title>🐑小羊美味餐廳🐑 - 數位菜單</title>
     <style>
         :root {
-            --primary-color: #003366;
-            --secondary-color: #0055A4;
-            --accent-color: #E24A00;
-            --bg-color: #F8F9FA;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --border-color: #E0E0E0;
+            --bg-color: #faf6f0;
+            --card-bg: #ffffff;
+            --primary-color: #c67a5c;
+            --text-main: #2c2620;
+            --text-sub: #544c43;
+            --text-en: #8c8279;
+            --accent-color: #e8caa4;
         }
 
         * {
@@ -22,263 +22,244 @@
         }
 
         body {
-            font-family: 'Segoe UI', "Microsoft JhengHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            padding-bottom: 60px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid var(--primary-color);
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #f3ede4, var(--bg-color));
         }
 
-        header h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .restaurant-title {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .restaurant-subtitle {
+            font-size: 1rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
-        .grid-layout {
+        /* 分類按鈕 */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 20px 30px 20px;
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 100;
+            box-shadow: 0 10px 10px -10px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid #e6ded5;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(198, 122, 92, 0.2);
+        }
+
+        /* 菜單網格 */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        .card {
-            background: #FFFFFF;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--secondary-color);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .menu-item {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card:hover {
+        .menu-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
         }
 
-        .card h2 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .tag {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            margin-left: auto;
-            font-weight: bold;
-        }
-
-        .content-list {
-            list-style: none;
-        }
-
-        .content-list li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .content-list li::before {
-            content: "▪";
-            color: var(--secondary-color);
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.2rem;
-        }
-
-        .highlight {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .price-table {
+        .image-box {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.95rem;
+            height: 220px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
         }
 
-        .price-table th, .price-table td {
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            text-align: left;
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .price-table th {
-            background-color: var(--bg-color);
-            color: var(--text-muted);
+        .menu-item:hover .image-box img {
+            transform: scale(1.05);
+        }
+
+        .item-info {
+            padding: 20px;
+        }
+
+        .item-id {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+            display: inline-block;
+        }
+
+        .title-vn {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .title-zh {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .title-en {
+            font-size: 0.85rem;
+            color: var(--text-en);
+            font-style: italic;
         }
 
         footer {
-            margin-top: 60px;
             text-align: center;
-            color: var(--text-muted);
+            padding: 40px 20px;
+            color: var(--text-sub);
             font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            .grid-layout {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 480px) {
+            .restaurant-title { font-size: 1.8rem; }
+            .menu-container { grid-template-columns: 1fr; gap: 20px; }
+            .image-box { height: 200px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>電源管理 IC 市場概況與開發策略分析</h1>
-            <p>針對 Buck-Boost, Charger 及各類電源架構之市場競品與成本解析</p>
-        </header>
+    <header>
+        <div class="restaurant-title">🐑 小羊美味餐廳 🐑</div>
+        <div class="restaurant-subtitle">Menu / Thực Đơn</div>
+    </header>
 
-        <div class="grid-layout">
-            
-            <!-- BUCK-BOOST Section -->
-            <div class="card">
-                <h2>BUCK-BOOST <span class="tag">升降壓架構</span></h2>
-                <ul class="content-list">
-                    <li><span class="highlight">成本優勢指標：</span>SC8723 具備極高性價比，取得成本低於 <strong>2 RMB</strong>。</li>
-                    <li><span class="highlight">電壓規格限制：</span>目前主流應用之電壓規格普遍落在 <strong>30V 以下</strong>。</li>
-                    <li><span class="highlight">雙向市場特性：</span>具備雙向 (Bidirectional) 充放電功能之產品市場定價較高，但整體應用受限，出貨量 (賣量) 較不具規模經濟。</li>
-                    <li><span class="highlight">協議功能整合：</span>一般而言，僅在整合「充電功能」的情境下，才需強制配備通訊協議。</li>
-                    <li><span class="highlight">多串應用門檻：</span>針對大功率充電需求，若電池串數設定為 <strong>3S (含)以上</strong>，則強烈建議甚至必須導入 <strong>PD (Power Delivery) 協議</strong>。</li>
-                </ul>
-            </div>
-
-            <!-- BOOST-CHARGER Section -->
-            <div class="card">
-                <h2>BOOST-CHARGER <span class="tag">升壓充電架構</span></h2>
-                <ul class="content-list">
-                    <li><span class="highlight">市場競爭態勢：</span>在 2S (兩串) 以下的應用屬高度殺價競爭之紅海市場，目前由<strong>英集芯 (Injoinic)</strong> 佔據絕對主流地位。</li>
-                </ul>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>型號</th>
-                            <th>市場行情 / 備註</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>IP2342</strong></td>
-                            <td>約 0.25 RMB，具備極端價格優勢</td>
-                        </tr>
-                        <tr>
-                            <td><strong>CN3302</strong></td>
-                            <td>傳聞出貨量極大 (約 5kk / 月)，有待進一步實證</td>
-                        </tr>
-                        <tr>
-                            <td><strong>CS5090</strong></td>
-                            <td>具備一定市場能見度之常規競品</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- BUCK-CHARGER Section -->
-            <div class="card">
-                <h2>BUCK-CHARGER <span class="tag">降壓充電架構</span></h2>
-                <p style="margin-bottom: 10px; color: var(--text-muted);">針對不同瓦數與協議需求，市場有明確的分級定價：</p>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>型號</th>
-                            <th>規格</th>
-                            <th>參考單價</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>IP2312</strong></td>
-                            <td>5V / 3A (基礎快充)</td>
-                            <td>~ 0.8 RMB</td>
-                        </tr>
-                        <tr>
-                            <td><strong>IP2317</strong></td>
-                            <td>12V / 5A (內建 PD 快充協議)</td>
-                            <td>~ 1.6 RMB</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- BOOST Section -->
-            <div class="card">
-                <h2>BOOST <span class="tag">升壓架構</span></h2>
-                <ul class="content-list">
-                    <li><span class="highlight">同步升壓需求強勁：</span>同步升壓 (Synchronous Boost) 轉換器在市場上依然保持高度需求。開發與選型可參考 <strong>ACM5618</strong> 及 <strong>ACM5620</strong> 兩款指標型號。</li>
-                    <li><span class="highlight">電壓規格升級趨勢：</span>終端應用對輸出電壓的要求正逐步拉高，傳統 12V 規格已開始不敷使用，未來應往更高電壓耐受度佈局。</li>
-                </ul>
-            </div>
-
-            <!-- BUCK Section -->
-            <div class="card">
-                <h2>BUCK <span class="tag">降壓架構</span></h2>
-                <ul class="content-list">
-                    <li><span class="highlight">基礎物料成本：</span>此領域已高度成熟，成本下探明顯。</li>
-                </ul>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>型號</th>
-                            <th>市場行情 / 狀態</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>RT8336</strong></td>
-                            <td>約 0.36 RMB</td>
-                        </tr>
-                        <tr>
-                            <td><strong>IP6546</strong></td>
-                            <td>約 0.25 RMB</td>
-                        </tr>
-                        <tr>
-                            <td><strong>TI5430</strong></td>
-                            <td>老牌經典料號，市場端仍維持穩定出貨量</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-        <footer>
-            <p>內部機密資料 · 僅供研發與市場佈局決策參考</p>
-        </footer>
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterMenu('all')">全部特選</button>
+        <button class="filter-btn" onclick="filterMenu('beef')">牛肉料理</button>
+        <button class="filter-btn" onclick="filterMenu('chicken')">雞肉料理</button>
+        <button class="filter-btn" onclick="filterMenu('pork')">豬排肉類</button>
+        <button class="filter-btn" onclick="filterMenu('other')">海鮮時蔬</button>
     </div>
 
+    <main class="menu-container" id="menuGrid">
+        </main>
+
+    <footer>
+        <p>© 2026 🐑小羊美味餐廳🐑 版權所有</p>
+    </footer>
+
+    <script>
+        const menuData = [
+            { id: 1, vn: "Cá hồi rán", zh: "香煎鮭魚", en: "Pan-fried Salmon", img: "pan-fried-salmon.jpg", cat: "other" },
+            { id: 2, vn: "Mướp đắng xào trứng", zh: "苦瓜炒蛋", en: "Stir-fried Bitter Melon with Egg", img: "stir-fried-bitter-melon.jpg", cat: "other" },
+            { id: 3, vn: "Canh trứng cà chua", zh: "番茄蛋花湯", en: "Tomato Egg Drop Soup", img: "tomato-egg-drop-soup.jpg", cat: "other" },
+            { id: 4, vn: "Ngọn bí xào tỏi", zh: "蒜炒南瓜苗", en: "Stir-fried Pumpkin Shoots", img: "stir-fried-pumpkin-shoots.jpg", cat: "other" },
+            { id: 5, vn: "Giá xào tim gà", zh: "豆芽炒雞心", en: "Bean Sprouts with Chicken Hearts", img: "bean-sprouts-chicken-hearts.jpg", cat: "chicken" },
+            { id: 6, vn: "Canh ngao chua", zh: "酸辣蛤蜊湯", en: "Sour Clam Soup", img: "sour-clam-soup.jpg", cat: "other" },
+            { id: 7, vn: "Canh gà ớt hiểm", zh: "野椒雞湯", en: "Spicy Chili Chicken Soup", img: "spicy-chili-chicken-soup.jpg", cat: "chicken" },
+            { id: 8, vn: "Gà xào nấm", zh: "香菇炒雞肉", en: "Mushroom Chicken Stir-fry", img: "mushroom-chicken-stir-fry.jpg", cat: "chicken" },
+            { id: 9, vn: "Gà rang gừng", zh: "薑爆雞肉", en: "Ginger Chicken", img: "ginger-chicken.jpg", cat: "chicken" },
+            { id: 10, vn: "Thịt nướng", zh: "烤肉", en: "Grilled Pork", img: "grilled-pork.jpg", cat: "pork" },
+            { id: 11, vn: "Bò hầm rau củ", zh: "蔬菜燉牛肉", en: "Beef and Vegetable Stew", img: "beef-vegetable-stew.jpg", cat: "beef" },
+            { id: 12, vn: "Thịt xá xíu", zh: "叉燒肉", en: "Char Siu Pork", img: "char-siu-pork.jpg", cat: "pork" },
+            { id: 13, vn: "Canh sườn dưa chua", zh: "酸菜排骨湯", en: "Pickled Mustard Pork Rib Soup", img: "pickled-mustard-rib-soup.jpg", cat: "pork" },
+            { id: 14, vn: "Bò xào măng tây", zh: "蘆筍炒牛肉", en: "Asparagus Beef Stir-fry", img: "asparagus-beef-stir-fry.jpg", cat: "beef" },
+            { id: 15, vn: "Bò xào bí ngòi", zh: "櫛瓜炒牛肉", en: "Zucchini Beef Stir-fry", img: "zucchini-beef-stir-fry.jpg", cat: "beef" },
+            { id: 16, vn: "Sườn xào chua ngọt", zh: "糖醋排骨", en: "Sweet and Sour Pork Ribs", img: "sweet-and-sour-pork-ribs.jpg", cat: "pork" },
+            { id: 17, vn: "Gà rang xả", zh: "香茅炒雞肉", en: "Lemongrass Chicken", img: "lemongrass-chicken.jpg", cat: "chicken" },
+            { id: 18, vn: "Bò xào hoa", zh: "時蔬炒牛肉", en: "Vegetable Beef Stir-fry", img: "vegetable-beef-stir-fry.jpg", cat: "beef" },
+            { id: 19, vn: "Thịt kho trứng", zh: "滷肉包蛋", en: "Braised Pork with Eggs", img: "braised-pork-with-eggs.jpg", cat: "pork" },
+            { id: 20, vn: "Sườn rim dứa", zh: "鳳梨燉排骨", en: "Pineapple Braised Pork Ribs", img: "pineapple-braised-pork-ribs.jpg", cat: "pork" },
+            { id: 21, vn: "Bò kho gừng", zh: "薑燉牛肉", en: "Ginger Braised Beef", img: "ginger-braised-beef.jpg", cat: "beef" },
+            { id: 22, vn: "Cánh gà rang muối", zh: "椒鹽雞翅", en: "Salt and Pepper Chicken Wings", img: "salt-pepper-chicken-wings.jpg", cat: "chicken" },
+            { id: 23, vn: "Nem rán", zh: "炸春捲", en: "Fried Spring Rolls", img: "fried-spring-rolls.jpg", cat: "other" },
+            { id: 24, vn: "Cánh gà chiên nước mắm", zh: "魚露炸雞翅", en: "Fish Sauce Chicken Wings", img: "fish-sauce-chicken-wings.jpg", cat: "chicken" },
+            { id: 25, vn: "Sườn rán", zh: "香煎排骨", en: "Pan-fried Pork Ribs", img: "pan-fried-pork-ribs.jpg", cat: "pork" }
+        ];
+
+        function renderMenu(items) {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '';
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-item';
+                card.innerHTML = `
+                    <div class="image-box">
+                        <img src="images/${item.img}" alt="${item.zh}" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80'">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-id">N° ${String(item.id).padStart(2, '0')}</div>
+                        <div class="title-vn">${item.vn}</div>
+                        <div class="title-zh">${item.zh}</div>
+                        <div class="title-en">${item.en}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterMenu(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                renderMenu(menuData);
+            } else {
+                const filtered = menuData.filter(item => item.cat === category);
+                renderMenu(filtered);
+            }
+        }
+
+        // 初始渲染全部菜色
+        renderMenu(menuData);
+    </script>
 </body>
 </html>
